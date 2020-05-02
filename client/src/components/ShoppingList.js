@@ -17,11 +17,12 @@ class ShoppingList extends Component{
     }
 
     render(){
+        const { items } = this.props.item;
         return(
                 <Container>
                     <ListGroup>
                         <TransitionGroup>
-                            {this.props.item(({_id, name}) => (
+                            {items(({_id, name}) => (
                                 <CSSTransition key={_id} timeout={500} classNames="fade">
                                     <ListGroupItem>
                                     <Button
