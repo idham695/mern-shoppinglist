@@ -17,7 +17,7 @@ class ShoppingList extends Component{
     }
 
     render(){
-        const { items } = this.props.item;
+        const { items } = item;
         return(
                 <Container>
                     <ListGroup>
