@@ -22,7 +22,7 @@ class ShoppingList extends Component{
                 <Container>
                     <ListGroup>
                         <TransitionGroup>
-                            {items(({_id, name}) => (
+                            {items.map(({_id, name}) => (
                                 <CSSTransition key={_id} timeout={500} classNames="fade">
                                     <ListGroupItem>
                                     <Button
