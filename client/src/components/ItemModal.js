@@ -11,6 +11,7 @@ import {
 } from 'reactstrap';
 import {connect} from 'react-redux';
 import {addItem} from '../actions/itemActions';
+import { PropTypes } from "prop-types";
 
 class ItemModal extends Component{
     state = {
@@ -18,6 +19,9 @@ class ItemModal extends Component{
         name: ''
     }
 
+    static propTypes = {
+        isAuthenticated: PropTypes.bool
+    }
 
     toggle = () => {
         this.setState({
@@ -44,13 +48,16 @@ class ItemModal extends Component{
     render(){
         return(
             <div>
-                <Button color="dark" style={{marginBottom: '10px'}} onClick={this.toggle}>Add Item</Button>
+                {this.props.isAuthenticated ? 
+                <Button color="dark" style={{marginBottom: '10px'}} 
+                onClick={this.toggle}>Add Item</Button> : <h4 className="mb-3 ml-4">Please login to manage items</h4>}
+                
                 <Modal isOpen={this.state.modal} toggle={this.toggle}>
                     <ModalHeader toggle={this.toggle}>Add to ShoppingList</ModalHeader>
                     <ModalBody>
                         <Form onSubmit={this.onSubmit}>
                             <FormGroup>
-                                <Label for="item"></Label>
+                                <Label for="item">Item</Label>
                                 <Input type="text" name="name" id="item" placeholder="add ShoppingItem" onChange={this.onChange} />
                                 <Button color="dark" style={{marginTop:'10px'}} block>Add ShoppingItem</Button>
                             </FormGroup>
@@ -63,7 +70,8 @@ class ItemModal extends Component{
 }
 
 const mapStateToProps = state => ({
-    item: state.item
+    item: state.item,
+    isAuthenticated: state.auth.isAuthenticated
 })
 
 

@@ -1,0 +1,4 @@
+{
+    "mongoURI": "mongodb+srv://idham:lunar1234@cluster0-ncbmu.mongodb.net/shoppinglist?retryWrites=true&w=majority",
+    "jwtSecret": "sl_myJwtSecret"
+}
