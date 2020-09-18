@@ -15,6 +15,15 @@ router.get('/', (req,res) => {
         .then(items => res.json(items))
 });
 
+// routes   GET api/items/:id
+// desc     Get Item By id
+// access   Public
+
+router.get('/:id', (req,res) => {
+    Item.findById(req.params.id)
+        .then(items => res.json(items))
+});
+
 // routes   POST api/items
 // desc     create an item
 // access   Private
@@ -27,8 +36,27 @@ router.post('/', auth, (req,res) => {
     newItem.save().then(item => res.json(item));
 });
 
+// routes   POST api/items/:id
+// desc     update an item
+// access   Private
+
+router.patch('/:id', auth, async (req,res, next) => {
+    try{
+        const id = req.params.id;
+        const update = req.body;
+        const options = {new : true}
+    
+    
+        const result = await Item.findByIdAndUpdate(id, update);
+        res.send(result)
+    }
+    catch(error){
+        error.message
+    }
+});
+
 // routes   DELETE api/items:id
-// desc     delete a item
+// desc     delete a item)
 // access   Private
 
 router.delete('/:id', auth, (req,res) => {
